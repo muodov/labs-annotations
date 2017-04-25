@@ -1,9 +1,24 @@
+$surfly-red: #e54747;
+$surfly-blue: #2c92d2;
+$surfly-yellow: #e9e760;
+$surfly-dark-blue: #123d57;
+$surfly-dark-red: #6e2222;
+$surfly-dark-yellow: #cbb054;
+
+$primary: $surfly-red;
+
 @import "~bulma/sass/utilities/_all";
 // @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
 // @import "sass/components/_all"
 // @import "sass/grid/_all"
 @import "~bulma/sass/layout/_all";
+
+.annotation-mark {
+    background-color: $surfly-red;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
 .annotation-panel {
     @import "~bulma/sass/base/_all";
@@ -22,12 +37,11 @@
 
     overflow-y: auto;
     position: fixed;
-    background: lightseagreen;
+    background: $white;
     height: 100%;
     width: 290px;
     right: 0;
     top: 0;
-    padding: 20px 0;
 
     transition: right .5s, opacity .4s;
 
@@ -37,19 +51,27 @@
     }
 
     .panel-contents {
-        margin: 0 20px;
+        padding: 20px;
         .snippet {
             max-height: 200px;
             overflow: auto;
         }
 
+        .comments {
+            margin-bottom: 20px;
+            .comment {
+                text-align: left;
+            }
+        }
+
         .add-form {
             .new-annotation-text,
-            .new-annotation-name,
+            .new-annotation-name {
+                padding: 0;
+            }
             .new-annotation-submit,
             .new-annotation-cancel {
-                max-width: 230px;
-                min-width: 100px;
+                text-align: left;
             }
         }
     }

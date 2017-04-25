@@ -3,11 +3,16 @@ var path = require('path');
 
 module.exports = {
     entry: './client/app.js',
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'inline-source-map',
+    // devServer: {
+    //     lazy: true,
+    //     filename: 'bundle.js'
+    // },
     output: {
         // filename: '[name].[chunkhash].js',
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'build')
+        filename: 'app.js',
+        path: path.resolve(__dirname, 'build'),
+        pathinfo: true
     },
     plugins: [
         new ManifestPlugin()

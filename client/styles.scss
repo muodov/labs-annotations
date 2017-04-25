@@ -1,0 +1,66 @@
+@import "~bulma/sass/utilities/_all";
+// @import "~bulma/sass/base/_all";
+@import "~bulma/sass/elements/_all";
+// @import "sass/components/_all"
+// @import "sass/grid/_all"
+@import "~bulma/sass/layout/_all";
+
+.annotation-panel {
+    @import "~bulma/sass/base/_all";
+    @import "~bulma/sass/elements/_all";
+    // these are from bulma's rule for html
+    font-size: $body-size;
+    text-rendering: $render-mode;
+    // from bulma's rule for body:
+    font-family: $family-primary;
+    color: $text;
+    font-size: 1rem;
+    font-weight: $weight-normal;
+    line-height: 1.5;
+    
+    // custom code below
+
+    overflow-y: auto;
+    position: fixed;
+    background: lightseagreen;
+    height: 100%;
+    width: 290px;
+    right: 0;
+    top: 0;
+    padding: 20px 0;
+
+    transition: right .5s, opacity .4s;
+
+    &.hidden {
+        right: -300px;
+        opacity: 0;
+    }
+
+    .panel-contents {
+        margin: 0 20px;
+        .snippet {
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .add-form {
+            .new-annotation-text,
+            .new-annotation-name,
+            .new-annotation-submit,
+            .new-annotation-cancel {
+                max-width: 230px;
+                min-width: 100px;
+            }
+        }
+    }
+}
+
+.add-annotation-button {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+
+    &.hidden {
+        display: none;
+    }
+}

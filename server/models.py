@@ -33,11 +33,12 @@ class Annotation(Base):
         return data
 
 
-def create_tables():
+def init_tables():
+    db.drop_tables([Annotation], safe=True)
     db.create_tables([Annotation], safe=True)
 
 
 if __name__ == '__main__':
     db.connect()
-    create_tables()
+    init_tables()
     db.close()

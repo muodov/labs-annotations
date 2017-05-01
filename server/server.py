@@ -4,10 +4,10 @@ from datetime import datetime
 from flask import Flask, request, g, send_from_directory
 from flask_restful import Api, abort, reqparse, Resource
 
-from .models import Annotation, db, create_tables
+from .models import Annotation, db, init_tables
 
 db.connect()
-create_tables()
+init_tables()
 db.close()
 
 app = Flask(__name__)

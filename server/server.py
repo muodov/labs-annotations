@@ -26,6 +26,7 @@ def after_request(response):
     g.db.close()
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT'
     return response
 
 

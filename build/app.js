@@ -3181,7 +3181,7 @@ function getAddButton() {
         but.classList.add(
             __WEBPACK_IMPORTED_MODULE_1__styles_scss___default.a['button'],
             __WEBPACK_IMPORTED_MODULE_1__styles_scss___default.a['is-primary'],
-            __WEBPACK_IMPORTED_MODULE_1__styles_scss___default.a['add-annotation-button'],
+            __WEBPACK_IMPORTED_MODULE_1__styles_scss___default.a['add-annotation-button']
         );
         but.textContent = 'Add annotation';
         but.addEventListener('click', e => {

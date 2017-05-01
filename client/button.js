@@ -9,7 +9,7 @@ export function getAddButton() {
         but.classList.add(
             styles['button'],
             styles['is-primary'],
-            styles['add-annotation-button'],
+            styles['add-annotation-button']
         );
         but.textContent = 'Add annotation';
         but.addEventListener('click', e => {

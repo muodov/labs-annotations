@@ -1,6 +1,7 @@
 import json
+import os
 from datetime import datetime
-from flask import Flask, request, g
+from flask import Flask, request, g, send_from_directory
 from flask_restful import Api, abort, reqparse, Resource
 
 from .models import Annotation, db, create_tables
@@ -85,5 +86,14 @@ class AnnotationResource(Resource):
 
 api.add_resource(AnnotationListResource, '/annotations/')
 api.add_resource(AnnotationResource, '/annotations/<annotation_id>')
+
+
+@app.route('/<path:path>')
+def static_file(path):
+    return send_from_directory(
+        os.path.join(os.path.dirname(__file__), '..', 'build'),
+        path
+    )
+
 
 application = app

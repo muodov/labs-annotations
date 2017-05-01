@@ -24,7 +24,7 @@ window.surfly_annotations = [
     //     ]
     // }
 ];
-window.ANNOTATION_SERVER = process && process.env && process.env.NODE_ENV === 'production' ? '//someserver.com' : 'http://localhost:5000';
+window.ANNOTATION_SERVER = process && process.env && process.env.NODE_ENV === 'production' ? 'https://labs-annotations.herokuapp.com' : 'http://localhost:5000';
 
 function isEqualRanges(r1, r2) {
     // compare two xpath-ranges

@@ -1,6 +1,7 @@
+import axios from 'axios';
 import {fromRange, toRange} from 'xpath-range';
 import {markAnnotation} from './annotate.js';
-import axios from 'axios';
+import {getLocation} from './location.js';
 
 window.surfly_annotations = [
     // {
@@ -51,7 +52,7 @@ export function submitAnnotation(data) {
             name: data.name,
             text: data.text
         });
-        axios.put(window.ANNOTATION_SERVER + '/annotations/' + annotation.id, annotation, {params: {url: window.location.href}});
+        axios.put(window.ANNOTATION_SERVER + '/annotations/' + annotation.id, annotation, {params: {url: getLocation()}});
     } else {    
         annotation = {
             snippet: data.snippet,
@@ -64,7 +65,7 @@ export function submitAnnotation(data) {
             ]
         };
         axios
-            .post(window.ANNOTATION_SERVER + '/annotations/', annotation, {params: {url: window.location.href}})
+            .post(window.ANNOTATION_SERVER + '/annotations/', annotation, {params: {url: getLocation()}})
             .then(resp => {
                 window.surfly_annotations.push(resp.data);
                 markAnnotation(resp.data);
@@ -75,7 +76,7 @@ export function submitAnnotation(data) {
 
 export function fetchAnnotations(url) {
     return axios
-        .get(window.ANNOTATION_SERVER + '/annotations/', {params: {url: window.location.href}})
+        .get(window.ANNOTATION_SERVER + '/annotations/', {params: {url: getLocation()}})
         .then(resp => {
             window.surfly_annotations = resp.data;
             window.surfly_annotations.forEach(annotation => {

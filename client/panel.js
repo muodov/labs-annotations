@@ -1,6 +1,7 @@
 import {fromRange, toRange} from 'xpath-range';
 import styles from './styles.scss';
 import {getAnnotationForRange, submitAnnotation} from './apiclient.js';
+import {getLocation} from './location.js';
 
 export function getPanel() {
     let panel = document.querySelector('.' + styles['annotation-panel']);
@@ -83,7 +84,7 @@ export function renderPanel(xpathRange, snippet) {
     let commentInput = contents.querySelector('.' + styles['new-annotation-text']);
     let submitBut = contents.querySelector('.' + styles['new-annotation-submit']);
     submitBut.addEventListener('click', e => {
-        let url = location.href;
+        let url = getLocation();
         if (url.indexOf('?') !== -1) {
             url = url.slice(0, url.indexOf('?'));
         }

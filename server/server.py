@@ -83,7 +83,7 @@ class AnnotationResource(Resource):
         return annotation.serialize()
 
 
-api.add_resource(AnnotationListResource, '/')
-api.add_resource(AnnotationResource, '/<annotation_id>')
+api.add_resource(AnnotationListResource, '/annotations/')
+api.add_resource(AnnotationResource, '/annotations/<annotation_id>')
 
 application = app

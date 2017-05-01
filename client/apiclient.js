@@ -51,7 +51,7 @@ export function submitAnnotation(data) {
             name: data.name,
             text: data.text
         });
-        axios.put(window.ANNOTATION_SERVER + '/' + annotation.id, annotation, {params: {url: window.location.href}});
+        axios.put(window.ANNOTATION_SERVER + '/annotations/' + annotation.id, annotation, {params: {url: window.location.href}});
     } else {    
         annotation = {
             snippet: data.snippet,
@@ -64,7 +64,7 @@ export function submitAnnotation(data) {
             ]
         };
         axios
-            .post(window.ANNOTATION_SERVER + '/', annotation, {params: {url: window.location.href}})
+            .post(window.ANNOTATION_SERVER + '/annotations/', annotation, {params: {url: window.location.href}})
             .then(resp => {
                 window.surfly_annotations.push(resp.data);
                 markAnnotation(resp.data);
@@ -75,7 +75,7 @@ export function submitAnnotation(data) {
 
 export function fetchAnnotations(url) {
     return axios
-        .get(window.ANNOTATION_SERVER + '/', {params: {url: window.location.href}})
+        .get(window.ANNOTATION_SERVER + '/annotations/', {params: {url: window.location.href}})
         .then(resp => {
             window.surfly_annotations = resp.data;
             window.surfly_annotations.forEach(annotation => {

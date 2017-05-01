@@ -30,6 +30,7 @@ class Annotation(Base):
     def serialize(self):
         data = json.loads(self.data)
         data['id'] = self.id
+        data['created'] = self.created.strftime('%b %d %H:%M'),
         return data
 
 

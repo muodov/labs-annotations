@@ -2,7 +2,7 @@ import styles from './styles.scss';
 import {hidePanel, getPanel} from './panel.js';
 import {hideAddButton, showAddButton} from './button.js';
 
-window.addEventListener('DOMContentLoaded', e => {
+function initAnnotations() {
     let panel = getPanel();
     document.addEventListener('selectionchange', e => {
         let selection = document.getSelection();
@@ -29,4 +29,13 @@ window.addEventListener('DOMContentLoaded', e => {
             showAddButton();
         }
     });
-});
+    console.log('annotations initialized!');
+}
+
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', e => {
+        initAnnotations();
+    });
+} else {
+    initAnnotations();
+}

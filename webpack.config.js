@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
     entry: './client/app.js',
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-source-map',
     // devServer: {
     //     lazy: true,
     //     filename: 'bundle.js'

@@ -8,7 +8,7 @@ export function getAddButton() {
         but = document.createElement('button');
         but.classList.add(
             styles['button'],
-            styles['is-success'],
+            styles['is-primary'],
             styles['add-annotation-button'],
         );
         but.textContent = 'Add annotation';

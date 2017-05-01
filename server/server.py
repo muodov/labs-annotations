@@ -3,8 +3,11 @@ from datetime import datetime
 from flask import Flask, request, g
 from flask_restful import Api, abort, reqparse, Resource
 
-from models import Annotation, db
+from .models import Annotation, db, create_tables
 
+db.connect()
+create_tables()
+db.close()
 
 app = Flask(__name__)
 app.config['ERROR_404_HELP'] = False
@@ -82,3 +85,5 @@ class AnnotationResource(Resource):
 
 api.add_resource(AnnotationListResource, '/')
 api.add_resource(AnnotationResource, '/<annotation_id>')
+
+application = app

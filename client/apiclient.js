@@ -1,27 +1,30 @@
 import {fromRange, toRange} from 'xpath-range';
 import {markAnnotation} from './annotate.js';
+import axios from 'axios';
 
 window.surfly_annotations = [
-    {
-        snippet: 'TEST SNIPPET',
-        range: {
-            start: "/html[1]/body[1]/h3[1]/text()[1]",
-            end: "/html[1]/body[1]/p[1]/text()[1]",
-            startOffset: 19,
-            endOffset: 26
-        },
-        comments: [
-            {
-                name: 'Test name 1',
-                text: 'Test text 1'
-            },
-            {
-                name: 'Test name 2',
-                text: 'Test text 2'
-            }
-        ]
-    }
+    // {
+    //     id: 34,
+    //     snippet: 'TEST SNIPPET',
+    //     range: {
+    //         start: "/html[1]/body[1]/h3[1]/text()[1]",
+    //         end: "/html[1]/body[1]/p[1]/text()[1]",
+    //         startOffset: 19,
+    //         endOffset: 26
+    //     },
+    //     comments: [
+    //         {
+    //             name: 'Test name 1',
+    //             text: 'Test text 1'
+    //         },
+    //         {
+    //             name: 'Test name 2',
+    //             text: 'Test text 2'
+    //         }
+    //     ]
+    // }
 ];
+window.ANNOTATION_SERVER = process && process.env && process.env.NODE_ENV === 'production' ? '//someserver.com' : '//localhost:5000';
 
 function isEqualRanges(r1, r2) {
     // compare two xpath-ranges
@@ -48,6 +51,7 @@ export function submitAnnotation(data) {
             name: data.name,
             text: data.text
         });
+        axios.put(window.ANNOTATION_SERVER + '/' + annotation.id, annotation, {params: {url: window.location.href}});
     } else {    
         annotation = {
             snippet: data.snippet,
@@ -59,7 +63,26 @@ export function submitAnnotation(data) {
                 }
             ]
         };
-        window.surfly_annotations.push(annotation);
-        markAnnotation(annotation);
+        axios
+            .post(window.ANNOTATION_SERVER + '/', annotation, {params: {url: window.location.href}})
+            .then(resp => {
+                window.surfly_annotations.push(resp.data);
+                markAnnotation(resp.data);
+                console.log('successfully submitted', JSON.stringify(data));
+            });
     }
+}
+
+export function fetchAnnotations(url) {
+    return axios
+        .get(window.ANNOTATION_SERVER + '/', {params: {url: window.location.href}})
+        .then(resp => {
+            window.surfly_annotations = resp.data;
+            window.surfly_annotations.forEach(annotation => {
+                markAnnotation(annotation);
+            });
+        })
+        .catch(err => {
+            console.error(err)
+        });
 }

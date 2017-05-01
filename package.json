@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/muodov/labs-annotations#readme",
   "devDependencies": {
+    "axios": "^0.16.1",
     "bulma": "^0.4.1",
     "css-loader": "^0.28.0",
     "node-sass": "^4.5.2",

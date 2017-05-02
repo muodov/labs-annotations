@@ -9,6 +9,7 @@ from .models import Annotation, db, init_tables
 
 app = Flask(__name__)
 app.config['ERROR_404_HELP'] = False
+sentry = None
 if not app.config['DEBUG']:
     sentry = Sentry(app)
 api = Api(app)
@@ -17,7 +18,9 @@ db.connect()
 init_tables()
 db.close()
 
-sentry.captureMessage('app started')
+if sentry:
+    sentry.captureMessage('app started')
+
 
 @app.before_request
 def before_request():
@@ -91,6 +94,11 @@ class AnnotationResource(Resource):
 
 api.add_resource(AnnotationListResource, '/annotations/')
 api.add_resource(AnnotationResource, '/annotations/<annotation_id>')
+
+
+@app.route('/gen_error')
+def gen_error():
+    raise Exception('test error')
 
 
 @app.route('/<path:path>')

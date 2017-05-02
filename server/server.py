@@ -3,17 +3,21 @@ import os
 from datetime import datetime
 from flask import Flask, request, g, send_from_directory
 from flask_restful import Api, abort, reqparse, Resource
+from raven.contrib.flask import Sentry
 
 from .models import Annotation, db, init_tables
+
+app = Flask(__name__)
+app.config['ERROR_404_HELP'] = False
+if not app.config['DEBUG']:
+    sentry = Sentry(app)
+api = Api(app)
 
 db.connect()
 init_tables()
 db.close()
 
-app = Flask(__name__)
-app.config['ERROR_404_HELP'] = False
-api = Api(app)
-
+sentry.captureMessage('app started')
 
 @app.before_request
 def before_request():

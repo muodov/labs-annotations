@@ -14,12 +14,15 @@ if not app.config['DEBUG']:
     sentry = Sentry(app)
 api = Api(app)
 
-db.connect()
-init_tables()
-db.close()
 
 if sentry:
     sentry.captureMessage('app started')
+
+
+@app.before_first_request
+def startup():
+    init_tables()
+    print("database tables created")
 
 
 @app.before_request

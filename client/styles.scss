@@ -82,8 +82,10 @@ $primary: $surfly-red;
 
 .add-annotation-button {
     position: fixed;
-    right: 15px;
-    bottom: 15px;
+    left: 50%;
+    top: 15px;
+    margin-left: -100px;
+    width: 200px;
 
     &.hidden {
         display: none;

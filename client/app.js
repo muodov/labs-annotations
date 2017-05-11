@@ -6,6 +6,7 @@ import {fetchAnnotations} from './apiclient.js';
 function initAnnotations() {
     let panel = getPanel();
     fetchAnnotations().then(() => {
+        hideAddButton();
         document.addEventListener('selectionchange', e => {
             let selection = document.getSelection();
             if (selection.rangeCount === 0) {

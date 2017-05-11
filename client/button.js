@@ -11,7 +11,7 @@ export function getAddButton() {
             styles['is-primary'],
             styles['add-annotation-button']
         );
-        but.textContent = 'Add annotation';
+        but.textContent = '';
         but.addEventListener('click', e => {
             e.stopPropagation();
             let selection = document.getSelection();
@@ -32,11 +32,15 @@ export function getAddButton() {
 export function hideAddButton() {
     console.log('hiding button');
     let buttonEl = getAddButton();
-    buttonEl.classList.add(styles['hidden']);
+    // buttonEl.classList.add(styles['hidden']);
+    buttonEl.disabled = true;
+    buttonEl.textContent = 'Select text to annotate';
 }
 
 export function showAddButton() {
     console.log('showing button');
     let buttonEl = getAddButton();
-    buttonEl.classList.remove(styles['hidden']);
+    // buttonEl.classList.remove(styles['hidden']);
+    buttonEl.disabled = false;
+    buttonEl.textContent = 'Add annotation';
 }

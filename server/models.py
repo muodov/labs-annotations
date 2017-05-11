@@ -49,7 +49,7 @@ class Annotation(Base):
 
 
 def init_tables():
-    db.drop_tables([Annotation], safe=True)
+    # db.drop_tables([Annotation], safe=True)
     db.create_tables([Annotation], safe=True)
 
 

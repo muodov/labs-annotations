@@ -28,12 +28,12 @@ def startup():
 @app.before_request
 def before_request():
     g.db = db
-    g.db.connect()
+    # g.db.connect()
 
 
 @app.after_request
 def after_request(response):
-    g.db.close()
+    # g.db.close()
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT'

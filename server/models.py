@@ -1,14 +1,28 @@
+import os
+import urlparse
 import json
 from peewee import (
     Model,
     SqliteDatabase,
+    PostgresqlDatabase,
     TextField,
     CharField,
     DateTimeField,
 )
 
-
-db = SqliteDatabase('db.db')
+urlparse.uses_netloc.append("postgres")
+DATABASE_URL = os.environ["DATABASE_URL"]
+if DATABASE_URL:
+    url = urlparse.urlparse(DATABASE_URL)
+    db = PostgresqlDatabase(
+        url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
+else:
+    db = SqliteDatabase('db.db')
 
 
 class Base(Model):

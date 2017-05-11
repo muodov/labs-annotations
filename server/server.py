@@ -67,6 +67,14 @@ class AnnotationListResource(Resource):
             created=datetime.now()
         )
         annotation.save()
+        if sentry:
+            sentry.captureMessage(
+                'New annotation',
+                tags={
+                    'annotation_url': annotation.url,
+                    'data': annotation.data
+                }
+            )
         return annotation.serialize()
 
 
@@ -91,6 +99,15 @@ class AnnotationResource(Resource):
         data = request.json
         annotation.data = json.dumps(data)
         annotation.save()
+
+        if sentry:
+            sentry.captureMessage(
+                'New annotation',
+                tags={
+                    'annotation_url': annotation.url,
+                    'data': annotation.data
+                }
+            )
 
         return annotation.serialize()
 

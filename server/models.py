@@ -1,5 +1,13 @@
 import os
-import urlparse
+try:
+    import urlparse
+    urlparse.uses_netloc.append("postgres")
+    urlparse_f = urlparse.urlparse
+except:
+    import urllib.parse
+    urllib.parse.uses_netloc.append("postgres")
+    urlparse_f = urllib.parse.urlparse
+
 import json
 from peewee import (
     Model,
@@ -10,10 +18,9 @@ from peewee import (
     DateTimeField,
 )
 
-urlparse.uses_netloc.append("postgres")
-DATABASE_URL = os.environ["DATABASE_URL"]
+DATABASE_URL = os.environ.get("DATABASE_URL")
 if DATABASE_URL:
-    url = urlparse.urlparse(DATABASE_URL)
+    url = urlparse_f(DATABASE_URL)
     db = PostgresqlDatabase(
         url.path[1:],
         user=url.username,

@@ -10,6 +10,7 @@ $primary: $surfly-red;
 @import "~bulma/sass/utilities/_all";
 // @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
+@import "~bulma/sass/form/_all";
 // @import "sass/components/_all"
 // @import "sass/grid/_all"
 @import "~bulma/sass/layout/_all";
@@ -33,7 +34,7 @@ $primary: $surfly-red;
     font-size: 1rem;
     font-weight: $weight-normal;
     line-height: 1.5;
-    
+
     // custom code below
 
     z-index: 999999;
